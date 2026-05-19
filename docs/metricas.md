@@ -2,7 +2,7 @@
 
 Catalogo de medidas DAX extraidas desde `powerbi/EFICIENCIA_DE_VENTAS.pbit`.
 
-Las medidas estan agrupadas por grupo de medidas de Power BI y por carpeta de visualizacion. Cuando una medida no tiene carpeta asignada, se clasifica en `General`.
+Las medidas estan organizadas como acordeones HTML por grupo de medidas de Power BI y carpeta de visualizacion. Cuando una medida no tiene carpeta asignada, se clasifica en `General`.
 
 Total de medidas extraidas: 194
 
@@ -19,11 +19,15 @@ Total de medidas extraidas: 194
 | MedidasTiempo | General | 8 |
 | MedidasVentas | General | 64 |
 
-## DimFormaPago
+## Catalogo
 
-### Carpeta: General
+<details>
+<summary><strong>DimFormaPago</strong> (1 medidas)</summary>
 
-#### Lista de valores de DesFormaPago
+<details>
+<summary><strong>Carpeta: General</strong> (1 medidas)</summary>
+
+### Lista de valores de DesFormaPago
 
 Descripcion:  VAR __DISTINCT_VALUES_COUNT = DISTINCTCOUNT('DimFormaPago'[DesFormaPago]) VAR __MAX_VALUES_TO_SHOW = 3 RETURN 	IF( 		__DISTINCT_VALUES_COUNT > __MAX_VALUES_TO_SHOW, 		CONCATENATE( 			CONCATENATEX( 				TOPN( 					__MAX_VALUES_TO_SHOW, 					VALUES('DimFormaPago'[DesFormaPago]), 					'DimFormaPago'[DesFormaPago], 					ASC 				), 				'DimFormaPago'[DesFormaPago], 				", ", 				'DimFormaPago'[DesFormaPago], 				ASC 			), 			",  etc." 		), 		CONCATENATEX( 			VALUES('DimFormaPago'[DesFormaPago]), 			'DimFormaPago'[DesFormaPago], 			", ", 			'DimFormaPago'[DesFormaPago], 			ASC 		) 	)
 
@@ -59,11 +63,17 @@ RETURN
 	)
 ```
 
-## MedidasClientes
+</details>
 
-### Carpeta: Cobertura
+</details>
 
-#### % cobertura x zona
+<details>
+<summary><strong>MedidasClientes</strong> (35 medidas)</summary>
+
+<details>
+<summary><strong>Carpeta: Cobertura</strong> (15 medidas)</summary>
+
+### % cobertura x zona
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -71,7 +81,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 IF(ISBLANK(DIVIDE([Cobertura],[Cobertura zona],0)),0,DIVIDE([Cobertura],[Cobertura zona],0))
 ```
 
-#### Clientes coberturados barrekov
+### Clientes coberturados barrekov
 
 Formato: `0`
 
@@ -79,7 +89,7 @@ Formato: `0`
 CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]), ALL(DimCalendario))
 ```
 
-#### Cobertura
+### Cobertura
 
 Formato: `#,0`
 
@@ -90,7 +100,7 @@ Descripcion:  IF(ISBLANK(CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ven
 IF(ISBLANK(CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ventas[ClienteVendido])),BLANK(),CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ventas[ClienteVendido]))
 ```
 
-#### Cobertura mes anterior
+### Cobertura mes anterior
 
 Formato: `#,0`
 
@@ -105,7 +115,7 @@ CALCULATE(
 )
 ```
 
-#### Cobertura Ruc Unico
+### Cobertura Ruc Unico
 
 Formato: `#,0`
 
@@ -116,7 +126,7 @@ Descripcion:  CALCULATE(DISTINCTCOUNT(Fact_Ventas[DocumentoUnico]),Fact_Ventas[C
 CALCULATE(DISTINCTCOUNT(Fact_Ventas[DocumentoUnico]),Fact_Ventas[ClienteVendido])
 ```
 
-#### Cobertura ruc unico mes anterior
+### Cobertura ruc unico mes anterior
 
 Formato: `0`
 
@@ -137,7 +147,7 @@ CALCULATE(
 )
 ```
 
-#### Cobertura sin repre
+### Cobertura sin repre
 
 Formato: `#,0`
 
@@ -148,7 +158,7 @@ Descripcion:  CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ventas[Cliente
 CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ventas[ClienteVendido],ALL(DimAgente[DesAgente]))
 ```
 
-#### Cobertura zona
+### Cobertura zona
 
 Formato: `#,0`
 
@@ -156,7 +166,7 @@ Formato: `#,0`
 CALCULATE(DISTINCTCOUNT(DimCliente[kCliente]), ALL(DimCalendario))
 ```
 
-#### Cobertura zona prueba
+### Cobertura zona prueba
 
 Formato: `0`
 
@@ -164,19 +174,19 @@ Formato: `0`
 DISTINCTCOUNT(DimCliente[kCliente])
 ```
 
-#### End value_Vcobertura
+### End value_Vcobertura
 
 ```DAX
 [Tasa de Cobertura mes anterior]*2.2
 ```
 
-#### Franja1_Vcobertura
+### Franja1_Vcobertura
 
 ```DAX
 [Tasa de Cobertura mes anterior]*0.5
 ```
 
-#### Franja2_Vcobertura
+### Franja2_Vcobertura
 
 Formato: `0`
 
@@ -184,13 +194,13 @@ Formato: `0`
 [Tasa de Cobertura mes anterior]*1
 ```
 
-#### Maximo valor cobertura zona
+### Maximo valor cobertura zona
 
 ```DAX
 [Cobertura zona]*1.7
 ```
 
-#### Tasa de cobertura
+### Tasa de cobertura
 
 Formato: `0.0\ %;-0.0\ %;0.0\ %`
 
@@ -198,7 +208,7 @@ Formato: `0.0\ %;-0.0\ %;0.0\ %`
 DIVIDE([Cobertura],[Cobertura zona],0)
 ```
 
-#### Tasa de Cobertura mes anterior
+### Tasa de Cobertura mes anterior
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -216,9 +226,12 @@ return CALCULATE(
 )
 ```
 
-### Carpeta: General
+</details>
 
-#### % YTD
+<details>
+<summary><strong>Carpeta: General</strong> (20 medidas)</summary>
+
+### % YTD
 
 Formato: `0\ %;-0\ %;0\ %`
 
@@ -226,7 +239,7 @@ Formato: `0\ %;-0\ %;0\ %`
 DIVIDE(([Cobertura YTD]-[Cobertura YTD -1]),[Cobertura YTD -1],0)
 ```
 
-#### Clientes ALL
+### Clientes ALL
 
 Formato: `#,0`
 
@@ -234,7 +247,7 @@ Formato: `#,0`
 CALCULATE([Total clientes Maestro],ALL(DimCalendario[Mes text]))
 ```
 
-#### Clientes CodigoRapido YTD CBH
+### Clientes CodigoRapido YTD CBH
 
 Formato: `#,0`
 
@@ -242,7 +255,7 @@ Formato: `#,0`
 CALCULATE([Total clientes Maestro],DATESYTD(DimCalendario[Date]))
 ```
 
-#### Clientes Recurrencia
+### Clientes Recurrencia
 
 Formato: `0`
 
@@ -250,7 +263,7 @@ Formato: `0`
 DISTINCTCOUNT(DimClientePrimeraCompra[kCliente])
 ```
 
-#### ClientesNuevos
+### ClientesNuevos
 
 Formato: `#,0`
 
@@ -263,7 +276,7 @@ Descripcion:           /*IF(ISBLANK(CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente
     CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),DimClientePrimeraCompra[StatusRecurrencia] = "Nuevo cliente",Fact_Ventas[ClienteVendido])
 ```
 
-#### ClientesNuevos mes anterior
+### ClientesNuevos mes anterior
 
 Formato: `0`
 
@@ -281,7 +294,7 @@ return CALCULATE(
 )
 ```
 
-#### ClientesNuevosRucUnico
+### ClientesNuevosRucUnico
 
 Formato: `0`
 
@@ -293,7 +306,7 @@ Descripcion:           CALCULATE(DISTINCTCOUNT(DimCliente[Documento]),DimCliente
     CALCULATE(DISTINCTCOUNT(DimCliente[Documento]),DimClientePrimeraCompra[StatusRecurrencia] = "Nuevo cliente",Fact_Ventas[ClienteVendido])
 ```
 
-#### ClientesRecurrentes
+### ClientesRecurrentes
 
 Formato: `#,0`
 
@@ -304,7 +317,7 @@ Descripcion:  CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ventas[Cliente
 CALCULATE(DISTINCTCOUNT(Fact_Ventas[kCliente]),Fact_Ventas[ClienteNuevo] = "Cliente Recurrente")
 ```
 
-#### Cobertura YTD
+### Cobertura YTD
 
 Formato: `0`
 
@@ -312,7 +325,7 @@ Formato: `0`
 CALCULATE( sumX(VALUES(DimCalendario[Mes text]),[Cobertura]),DATESYTD(dateadd(DimCalendario[Date],0,MONTH)))//DATESYTD(DimCalendario[Date]))
 ```
 
-#### Cobertura YTD -1
+### Cobertura YTD -1
 
 Formato: `0`
 
@@ -331,7 +344,7 @@ CALCULATE(
 )
 ```
 
-#### CoberturaEvolucion
+### CoberturaEvolucion
 
 Formato: `0`
 
@@ -347,7 +360,7 @@ CALCULATE(
 ))
 ```
 
-#### CoberturaLinea
+### CoberturaLinea
 
 Formato: `0`
 
@@ -355,19 +368,19 @@ Formato: `0`
 CALCULATE(DISTINCTCOUNT(DimArticulo[Nivel2]),Fact_Ventas[ClienteVendido])
 ```
 
-#### End value_Vclientesnuevos
+### End value_Vclientesnuevos
 
 ```DAX
 MedidasClientes[ClientesNuevos mes anterior]*2.2
 ```
 
-#### Franja1_Vclientesnuevos
+### Franja1_Vclientesnuevos
 
 ```DAX
 MedidasClientes[ClientesNuevos mes anterior]*0.5
 ```
 
-#### Franja2_Vclientesnuevos
+### Franja2_Vclientesnuevos
 
 Formato: `0`
 
@@ -375,7 +388,7 @@ Formato: `0`
 MedidasClientes[ClientesNuevos mes anterior]*1
 ```
 
-#### ImporteCobranza
+### ImporteCobranza
 
 Formato: `"S/"\ #,0.00;-"S/"\ #,0.00;"S/"\ #,0.00`
 
@@ -383,13 +396,13 @@ Formato: `"S/"\ #,0.00;-"S/"\ #,0.00;"S/"\ #,0.00`
 SUM(Fact_PlanCobranza[importe])
 ```
 
-#### ImporteCobranzaM
+### ImporteCobranzaM
 
 ```DAX
 IF([ImporteCobranza]=0,BLANK(),[ImporteCobranza])
 ```
 
-#### Total clientes Maestro
+### Total clientes Maestro
 
 Formato: `#,0`
 
@@ -397,7 +410,7 @@ Formato: `#,0`
 DISTINCTCOUNT(DimClientePrimeraCompra[kCliente])
 ```
 
-#### Total clientes unicos
+### Total clientes unicos
 
 Formato: `#,0`
 
@@ -405,7 +418,7 @@ Formato: `#,0`
 DISTINCTCOUNT(DimCliente[Documento])
 ```
 
-#### Total clientes zona
+### Total clientes zona
 
 Formato: `0`
 
@@ -413,11 +426,17 @@ Formato: `0`
 DISTINCTCOUNT(DimCliente[kCliente])
 ```
 
-## MedidasCuotaCobranza
+</details>
 
-### Carpeta: General
+</details>
 
-#### % CumplimientoCuotaCobranza
+<details>
+<summary><strong>MedidasCuotaCobranza</strong> (42 medidas)</summary>
+
+<details>
+<summary><strong>Carpeta: General</strong> (42 medidas)</summary>
+
+### % CumplimientoCuotaCobranza
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -425,25 +444,25 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 DIVIDE(MedidasCuotaCobranza[Cobrado2],[Cuota cobranza],0)
 ```
 
-#### % CumplimientoCuotaCobranza/2
+### % CumplimientoCuotaCobranza/2
 
 ```DAX
 DIVIDE(MedidasCuotaCobranza[Cobrado2],[Cuota cobranza],0)/1.5
 ```
 
-#### Cobrado mes actual
+### Cobrado mes actual
 
 ```DAX
 CALCULATE  ([Cobrado2] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### Cobrado mes actual P
+### Cobrado mes actual P
 
 ```DAX
 CALCULATE  ([Cobrado] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### Cobrado mes anterior
+### Cobrado mes anterior
 
 Descripcion:  var ultimafecha = MAX(Fact_Ventas[fecha]) return CALCULATE(                     CALCULATE(MedidasCuotaCobranza[Cobrado2],                             Filter(DATEADD(DimCalendario[Date],-1,MONTH),DAY(DimCalendario[Date])<=DAY(ultimafecha))              ),FILTER(DimCalendario,                     DimCalendario[Date] <= TODAY()              ) )
 
@@ -459,7 +478,7 @@ return CALCULATE(
 )
 ```
 
-#### Cobrado Mes Anterior Crec %
+### Cobrado Mes Anterior Crec %
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -467,7 +486,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 DIVIDE(([Cobrado2]-[Cobrado Mes Anterior Mismos dias]),[Cobrado Mes Anterior Mismos dias])
 ```
 
-#### Cobrado Mes Anterior Mismos dias
+### Cobrado Mes Anterior Mismos dias
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -486,7 +505,7 @@ return CALCULATE(
 --Fact_CuotaCobranza[cobranza_cuota]
 ```
 
-#### Cobrado mes anterior P
+### Cobrado mes anterior P
 
 Descripcion:  CALCULATE(                     CALCULATE([Cobrado],                             DATEADD(FILTER(DATESMTD(DimCalendario[Date]),                                 DimCalendario[Date] <= TODAY()                                     ),                                     -1,MONTH                 )              ),FILTER(DimCalendario,                     DimCalendario[Date] <= TODAY()              ) )
 
@@ -505,13 +524,13 @@ CALCULATE(
 )
 ```
 
-#### Cobrado YTD F
+### Cobrado YTD F
 
 ```DAX
 CALCULATE(CALCULATE([Cobrado],DATESYTD(DimCalendario[Date])),ALLEXCEPT(DimCalendario,DimCalendario[Last Business Date]))
 ```
 
-#### Cobrado2
+### Cobrado2
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -519,13 +538,13 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 IF(SUM(Fact_CuotaCobranza[cobranza_cuota])=0,BLANK(),SUM(Fact_CuotaCobranza[cobranza_cuota]))
 ```
 
-#### CobradoAcumulado
+### CobradoAcumulado
 
 ```DAX
 CALCULATE([Cobrado], DATESYTD(DimCalendario[Date]))
 ```
 
-#### CobradoHace1Año
+### CobradoHace1Año
 
 Descripcion:  CALCULATE(                     CALCULATE([Cobrado YTD F],                             DATEADD(FILTER(DATESMTD(DimCalendario[Date]),                                 DimCalendario[Date] <= TODAY()                                     ),                                     -1,YEAR                 )              ),FILTER(DimCalendario,                     DimCalendario[Date] <= TODAY()              ) )
 
@@ -544,7 +563,7 @@ CALCULATE(
 )
 ```
 
-#### CobradoMesHace1AñoF
+### CobradoMesHace1AñoF
 
 Descripcion:  CALCULATE(                     CALCULATE([Cobrado2],                             DATEADD(FILTER(DATESMTD(DimCalendario[Date]),                                 DimCalendario[Date] <= TODAY()                                     ),                                     -1,YEAR                 )              ),FILTER(DimCalendario,                     DimCalendario[Date] <= TODAY()              ) )
 
@@ -563,13 +582,13 @@ CALCULATE(
 )
 ```
 
-#### CobradoRepre
+### CobradoRepre
 
 ```DAX
 SUM(Fact_CuotaCobranza[cobranza_cuota])
 ```
 
-#### Cuota cobranza
+### Cuota cobranza
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -577,25 +596,25 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 SUM(Fact_CuotaCobranza[cuota])
 ```
 
-#### CuotaCobranzaRepre
+### CuotaCobranzaRepre
 
 ```DAX
 SUM(Fact_CuotaCobranza[cuota])
 ```
 
-#### DiasGiro
+### DiasGiro
 
 ```DAX
 ([Cobrado2]/[Venta SL])*360 
 ```
 
-#### End value_Vcuotacobranza
+### End value_Vcuotacobranza
 
 ```DAX
 [Cuota cobranza]*1.70
 ```
 
-#### F1 Ccobranza
+### F1 Ccobranza
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -603,7 +622,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 0.69
 ```
 
-#### F2 Ccobranza
+### F2 Ccobranza
 
 Formato: `0\ %;-0\ %;0\ %`
 
@@ -611,13 +630,13 @@ Formato: `0\ %;-0\ %;0\ %`
 0.85
 ```
 
-#### F3 Ccobranza
+### F3 Ccobranza
 
 ```DAX
 0.94
 ```
 
-#### F4 Ccobranza
+### F4 Ccobranza
 
 Formato: `0`
 
@@ -625,7 +644,7 @@ Formato: `0`
 1
 ```
 
-#### FechaVencimiento
+### FechaVencimiento
 
 Formato: `0`
 
@@ -633,43 +652,43 @@ Formato: `0`
 DATEDIFF(MAX(DimCalendario[Date]),MAX(Fact_PlanCobranza[fecha_vencimiento]),DAY)
 ```
 
-#### Franja1_CCOBRANZA_FC
+### Franja1_CCOBRANZA_FC
 
 ```DAX
 [Cuota cobranza]*0.5
 ```
 
-#### Franja2_CCOBRANZA_FC
+### Franja2_CCOBRANZA_FC
 
 ```DAX
 [Cuota cobranza]*1
 ```
 
-#### icono
+### icono
 
 ```DAX
 [Cobrado YTD F] - [CobradoHace1Año]
 ```
 
-#### iconoCobradohace1añoF
+### iconoCobradohace1añoF
 
 ```DAX
 [Cobrado mes actual] - [CobradoHace1Año]
 ```
 
-#### IconoCobradoMes
+### IconoCobradoMes
 
 ```DAX
 [Cobrado mes actual] - [Cobrado mes anterior]
 ```
 
-#### Meta Ccobranza
+### Meta Ccobranza
 
 ```DAX
 0.85
 ```
 
-#### Por cobrar mes anterior
+### Por cobrar mes anterior
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -687,7 +706,7 @@ return CALCULATE(
 )
 ```
 
-#### PorCobrar
+### PorCobrar
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -699,7 +718,7 @@ Descripcion: --VAR _COB = SUM(Fact_CuotaCobranza[Por cobrar]) --RETURN IF(_COB =
 SUM(Fact_CuotaCobranza[Por cobrar])
 ```
 
-#### PorCobrar PorVencer
+### PorCobrar PorVencer
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -707,7 +726,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE([PorCobrar],Fact_CuotaCobranza[Dias Vencidos]<0)
 ```
 
-#### PorCobrar Vencido
+### PorCobrar Vencido
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -715,7 +734,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE([PorCobrar],Fact_CuotaCobranza[Dias Vencidos]>=0)
 ```
 
-#### PorCobrar Vencido Dias Retraso Ponderado
+### PorCobrar Vencido Dias Retraso Ponderado
 
 Descripcion:  //[PorCobrar Vencido Ratio%]*AVERAGE(Fact_CuotaCobranza[Dias Vencidos]) var _t = CALCULATETABLE(Fact_CuotaCobranza,FILTER(Fact_CuotaCobranza,Fact_CuotaCobranza[Dias Vencidos]>0))  var _table = SUMMARIZE(_t,DimAgenteZona[Nivel1],DimAgenteZona[Nivel2],DimAgenteZona[Nivel3],DimAgenteZona[Nivel4],DimCliente[codCliente_RazonSocial],Fact_CuotaCobranza[DOCUMENTO],                         "NDD",AVERAGE(Fact_CuotaCobranza[Dias Vencidos]),"Ratio",AVERAGE(Fact_CuotaCobranza[Dias Vencidos])*[PorCobrar Vencido Ratio%])  var _res = GROUPBY( _table,"Promedio",AVERAGEX(CURRENTGROUP(),[NDD]))*[PorCobrar Vencido Ratio%] var _res1 = GROUPBY( _table,"Promedio",SUMX(CURRENTGROUP(),[Ratio]))*[PorCobrar Vencido Ratio%] return IF(ISBLANK([PorCobrar Vencido]),BLANK(),if(HASONEVALUE(Fact_CuotaCobranza[DOCUMENTO]),_res,_res1)) //SUMX(ALLSELECTED(Fact_CuotaCobranza),_res)  //var _aa = [PorCobrar Vencido Ratio%]*AVERAGE(Fact_CuotaCobranza[Dias Vencidos]) //var _bb = IF(ISBLANK([Cuota cobranza]),BLANK(), if(HASONEVALUE(DimCliente[codCliente_RazonSocial]),_aa,SUMX(Fact_CuotaCobranza,_aa)))
 
@@ -737,7 +756,7 @@ IF(ISBLANK([PorCobrar Vencido]),BLANK(),if(HASONEVALUE(Fact_CuotaCobranza[DOCUME
 //var _bb = IF(ISBLANK([Cuota cobranza]),BLANK(), if(HASONEVALUE(DimCliente[codCliente_RazonSocial]),_aa,SUMX(Fact_CuotaCobranza,_aa)))
 ```
 
-#### PorCobrar Vencido Ratio%
+### PorCobrar Vencido Ratio%
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -756,7 +775,7 @@ Descripcion:   var _num = [PorCobrar Vencido]   var _table = SUMMARIZE(ALLSELECT
 
 ```
 
-#### PorCobrar Vencido USERELATIONSHIP Cliente
+### PorCobrar Vencido USERELATIONSHIP Cliente
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -767,31 +786,31 @@ Descripcion: //CALCULATE([PorCobrar],Fact_CuotaCobranza[Dias Vencidos]>=0,USEREL
 [PorCobrar]
 ```
 
-#### SeleRepreCuota
+### SeleRepreCuota
 
 ```DAX
 IF(ISBLANK(SELECTEDVALUE(DimAgente[DesAgente])),[Cuota cobranza],[CuotaCobranzaRepre])
 ```
 
-#### Tasa de morosidad Cuota
+### Tasa de morosidad Cuota
 
 ```DAX
 DIVIDE([PorCobrar Vencido],[PorCobrar],0)
 ```
 
-#### Tex cum ccobranza_fc
+### Tex cum ccobranza_fc
 
 ```DAX
 "Cumplimiento actual:"
 ```
 
-#### Text Cuota Cobranza
+### Text Cuota Cobranza
 
 ```DAX
 "<Al corte de hoy el avance de la cobranza es de " & FORMAT( [% CumplimientoCuotaCobranza],"Percent") & ", tenemos Vencidos -> S/. " & SUBSTITUTE(FORMAT([PorCobrar Vencido],"#,0"),".",",") & "  y en el tramo de cuentas morosas > 60 días -> S/. " & SUBSTITUTE(format(CALCULATE([PorCobrar Vencido],FILTER(Fact_CuotaCobranza,[Dias Vencidos]>=60)),"#,0"),".",",") & ">"
 ```
 
-#### Total clientes por cobrar
+### Total clientes por cobrar
 
 Formato: `#,0`
 
@@ -799,7 +818,7 @@ Formato: `#,0`
 CALCULATE(DISTINCTCOUNT(Fact_CuotaCobranza[kCliente]),Fact_CuotaCobranza[Por cobrar]>0)
 ```
 
-#### Total clientes por cobrar mes anterior
+### Total clientes por cobrar mes anterior
 
 Formato: `#,0`
 
@@ -817,11 +836,17 @@ return CALCULATE(
 )
 ```
 
-## MedidasMargen
+</details>
 
-### Carpeta: General
+</details>
 
-#### % Avance con respecto al mes anterior
+<details>
+<summary><strong>MedidasMargen</strong> (11 medidas)</summary>
+
+<details>
+<summary><strong>Carpeta: General</strong> (11 medidas)</summary>
+
+### % Avance con respecto al mes anterior
 
 Formato: `0\ %;-0\ %;0\ %`
 
@@ -829,13 +854,13 @@ Formato: `0\ %;-0\ %;0\ %`
 DIVIDE(MedidasMargen[Margen],MedidasMargen[Margen mes anterior],0)
 ```
 
-#### % Margen
+### % Margen
 
 ```DAX
 "Margen vs venta neta: " & format(DIVIDE((MedidasVentas[Venta SL]-[Costo]),[Venta SL],0),"0.00%")
 ```
 
-#### % Margen mes anterior
+### % Margen mes anterior
 
 Formato: `0.0\ %;-0.0\ %;0.0\ %`
 
@@ -856,7 +881,7 @@ CALCULATE(
 )
 ```
 
-#### Costo
+### Costo
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -864,25 +889,25 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 SUM(Fact_Ventas[costo_bruto])
 ```
 
-#### End value_Vmargen
+### End value_Vmargen
 
 ```DAX
 MedidasMargen[Margen mes anterior]*1.5
 ```
 
-#### Franja1_Vmargen
+### Franja1_Vmargen
 
 ```DAX
 MedidasMargen[Margen mes anterior]*0.5
 ```
 
-#### Franja2_Vmargen
+### Franja2_Vmargen
 
 ```DAX
 MedidasMargen[Margen mes anterior]*1
 ```
 
-#### Margen
+### Margen
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -890,7 +915,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 MedidasVentas[Venta SL]-[Costo]
 ```
 
-#### Margen mes actual
+### Margen mes actual
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -898,7 +923,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE  ( MedidasMargen[Margen] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### Margen mes anterior
+### Margen mes anterior
 
 Descripcion:   var ultimafecha = MAX(Fact_Ventas[fecha]) return CALCULATE(                     CALCULATE(MedidasMargen[Margen],                             Filter(DATEADD(DimCalendario[Date],-1,MONTH),DAY(DimCalendario[Date])<=DAY(ultimafecha))              ),FILTER(DimCalendario,                     DimCalendario[Date] <= TODAY()              ) )
 
@@ -915,7 +940,7 @@ return CALCULATE(
 )
 ```
 
-#### Prueba today
+### Prueba today
 
 Formato: `General Date`
 
@@ -923,11 +948,17 @@ Formato: `General Date`
 MAX(Fact_Ventas[fecha])
 ```
 
-## MedidasPlanCobranza
+</details>
 
-### Carpeta: General
+</details>
 
-#### %vencido
+<details>
+<summary><strong>MedidasPlanCobranza</strong> (33 medidas)</summary>
+
+<details>
+<summary><strong>Carpeta: General</strong> (33 medidas)</summary>
+
+### %vencido
 
 Formato: `0\ %;-0\ %;0\ %`
 
@@ -935,7 +966,7 @@ Formato: `0\ %;-0\ %;0\ %`
 DIVIDE([DeudaVencida],[Total saldo],0)
 ```
 
-#### Cobrado
+### Cobrado
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -943,13 +974,13 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE(SUM(Fact_PlanCobranza[importe]),Fact_PlanCobranza[Status]="Al Día")
 ```
 
-#### Deuda mes actual
+### Deuda mes actual
 
 ```DAX
 CALCULATE  ( [Total saldo] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### DeudaVencida
+### DeudaVencida
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -957,7 +988,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE([Total saldo],Fact_PlanCobranza[Status]="Vencido")
 ```
 
-#### End Value Morosidad
+### End Value Morosidad
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -965,7 +996,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 1
 ```
 
-#### F1 Tmoro
+### F1 Tmoro
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -973,7 +1004,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 0.2
 ```
 
-#### F2 Tmoro
+### F2 Tmoro
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -981,7 +1012,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 0.3
 ```
 
-#### Importe vencido
+### Importe vencido
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -989,7 +1020,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE(SUM(Fact_PlanCobranza[importe]),Fact_PlanCobranza[Status]="Vencido")
 ```
 
-#### Importe vencido mes anterior
+### Importe vencido mes anterior
 
 Descripcion:  var ultimafecha = MAX(Fact_Ventas[fecha]) return CALCULATE(                     CALCULATE([Importe vencido],                             Filter(DATEADD(DimCalendario[Date],-1,MONTH),DAY(DimCalendario[Date])<=DAY(ultimafecha))              ),FILTER(DimCalendario,                     DimCalendario[Date] <= TODAY()              ) )
 
@@ -1005,7 +1036,7 @@ return CALCULATE(
 )
 ```
 
-#### Nro de documentos
+### Nro de documentos
 
 Formato: `#,0`
 
@@ -1013,7 +1044,7 @@ Formato: `#,0`
 DISTINCTCOUNT(Fact_PlanCobranza[documento])
 ```
 
-#### Ratio vencido de por cobrar
+### Ratio vencido de por cobrar
 
 Formato: `0.0\ %;-0.0\ %;0.0\ %`
 
@@ -1021,7 +1052,7 @@ Formato: `0.0\ %;-0.0\ %;0.0\ %`
 DIVIDE([DeudaVencida],[Total saldo],0)
 ```
 
-#### Saldo por vencer
+### Saldo por vencer
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1032,7 +1063,7 @@ Descripcion:  IF(ISBLANK(CALCULATE([Total saldo],Fact_PlanCobranza[Status]="Por 
 IF(ISBLANK(CALCULATE([Total saldo],Fact_PlanCobranza[Status]="Por vencer")),BLANK(),CALCULATE([Total saldo],Fact_PlanCobranza[Status]="Por vencer"))
 ```
 
-#### Saldo por vencer mes anterior
+### Saldo por vencer mes anterior
 
 Descripcion:  IF(ISBLANK(CALCULATE([Saldo por vencer],DATEADD(DimCalendario[Date],-1,MONTH))),0,CALCULATE([Saldo por vencer],DATEADD(DimCalendario[Date],-1,MONTH)))
 
@@ -1041,25 +1072,25 @@ Descripcion:  IF(ISBLANK(CALCULATE([Saldo por vencer],DATEADD(DimCalendario[Date
 IF(ISBLANK(CALCULATE([Saldo por vencer],DATEADD(DimCalendario[Date],-1,MONTH))),BLANK(),CALCULATE([Saldo por vencer],DATEADD(DimCalendario[Date],-1,MONTH)))
 ```
 
-#### Saldo vencido mes anterior
+### Saldo vencido mes anterior
 
 ```DAX
 CALCULATE([DeudaVencida],DATEADD(DimCalendario[Date],-1,MONTH))
 ```
 
-#### Sele mes año
+### Sele mes año
 
 ```DAX
 "De inicios del "&SELECTEDVALUE(DimCalendario[Año])&" hasta "& SELECTEDVALUE(DimCalendario[Mes text completo])&" del "&SELECTEDVALUE(DimCalendario[Año])
 ```
 
-#### SeleCanal
+### SeleCanal
 
 ```DAX
 "DETALLE DE VENCIDOS DE "&IF(ISBLANK(SELECTEDVALUE(DimAgenteZona[Nivel1])),"TODOS LOS CANALES",UPPER(SELECTEDVALUE(DimAgenteZona[Nivel1])))
 ```
 
-#### Tasa de morosidad
+### Tasa de morosidad
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1067,7 +1098,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 DIVIDE([DeudaVencida],[Total saldo],0)
 ```
 
-#### Total Cliente YTD
+### Total Cliente YTD
 
 Formato: `#,0`
 
@@ -1075,7 +1106,7 @@ Formato: `#,0`
 CALCULATE(DISTINCTCOUNT(Fact_PlanCobranza[kCliente]),DATESYTD(DimCalendario[Date]))
 ```
 
-#### Total Clientes con Saldo REP
+### Total Clientes con Saldo REP
 
 Formato: `#,0`
 
@@ -1083,7 +1114,7 @@ Formato: `#,0`
 DISTINCTCOUNT(Fact_PlanCobranza[kCliente])
 ```
 
-#### Total Clientes con Saldo YTD
+### Total Clientes con Saldo YTD
 
 Formato: `#,0`
 
@@ -1096,7 +1127,7 @@ CALCULATE(DISTINCTCOUNT(Fact_PlanCobranza[kCliente]),Fact_PlanCobranza[Status]<>
 
 ```
 
-#### Total Clientes YTD
+### Total Clientes YTD
 
 Formato: `0`
 
@@ -1104,7 +1135,7 @@ Formato: `0`
 CALCULATE(DISTINCTCOUNT(Fact_PlanCobranza[kCliente]),DATESYTD(DimCalendario[Date]))
 ```
 
-#### Total deuda CONREPRE
+### Total deuda CONREPRE
 
 Formato: `"S/"\ #,0.00;-"S/"\ #,0.00;"S/"\ #,0.00`
 
@@ -1112,7 +1143,7 @@ Formato: `"S/"\ #,0.00;-"S/"\ #,0.00;"S/"\ #,0.00`
 SUM(Fact_PlanCobranza[importe])
 ```
 
-#### Total importe
+### Total importe
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1120,19 +1151,19 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 SUM(Fact_PlanCobranza[importe])
 ```
 
-#### Total Importe AlContado
+### Total Importe AlContado
 
 ```DAX
 CALCULATE([Total importe],DimFormaPago[Tipo]="Contado")
 ```
 
-#### Total Importe YTD
+### Total Importe YTD
 
 ```DAX
 CALCULATE(SUM(Fact_PlanCobranza[importe]),DATESYTD(DimCalendario[Date]))
 ```
 
-#### Total saldo
+### Total saldo
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1143,7 +1174,7 @@ var _saldo = SUM(Fact_PlanCobranza[saldo])
 return if(ISBLANK(_saldo) || _saldo = 0,BLANK(),_saldo)
 ```
 
-#### Total Saldo Años Anteriores
+### Total Saldo Años Anteriores
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1157,7 +1188,7 @@ return
     CALCULATE([Total saldo],FILTER(DimCalendario,DimCalendario[Date] >= _fecMin && DimCalendario[Date] <= _fecMax))
 ```
 
-#### Total Saldo YTD
+### Total Saldo YTD
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1165,7 +1196,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE(SUM(Fact_PlanCobranza[saldo]),DATESYTD(DimCalendario[Date]))
 ```
 
-#### Total saldo YTD mes anterior
+### Total saldo YTD mes anterior
 
 Descripcion:  CALCULATE([Total Saldo YTD],DATEADD(DimCalendario[Date],-1,MONTH))
 
@@ -1174,7 +1205,7 @@ Descripcion:  CALCULATE([Total Saldo YTD],DATEADD(DimCalendario[Date],-1,MONTH))
 CALCULATE([Total Saldo YTD],DATEADD(DimCalendario[Date],-1,MONTH))
 ```
 
-#### TotalClientes
+### TotalClientes
 
 Formato: `#,0`
 
@@ -1182,7 +1213,7 @@ Formato: `#,0`
 DISTINCTCOUNT(Fact_PlanCobranza[kCliente])
 ```
 
-#### TotalClientes conSaldo mes anterior
+### TotalClientes conSaldo mes anterior
 
 Formato: `#,0`
 
@@ -1203,7 +1234,7 @@ CALCULATE(
 )
 ```
 
-#### TotalSaldoaCobrar
+### TotalSaldoaCobrar
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1211,7 +1242,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE(SUM(Fact_PlanCobranza[saldo]),Fact_PlanCobranza[Status]<>"Al Día")
 ```
 
-#### TotalSaldoaCobrarMesAnterior
+### TotalSaldoaCobrarMesAnterior
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1232,11 +1263,17 @@ CALCULATE(
 )
 ```
 
-## MedidasTiempo
+</details>
 
-### Carpeta: General
+</details>
 
-#### _fecMin
+<details>
+<summary><strong>MedidasTiempo</strong> (8 medidas)</summary>
+
+<details>
+<summary><strong>Carpeta: General</strong> (8 medidas)</summary>
+
+### _fecMin
 
 Formato: `General Date`
 
@@ -1270,19 +1307,19 @@ return
 _fecMin
 ```
 
-#### Año Actual
+### Año Actual
 
 ```DAX
 "Venta acumulada "&CALCULATE(MAX(DimCalendario[Año]),ALLSELECTED())&" Vs "&CALCULATE(MAX(DimCalendario[Año]),ALLSELECTED())-1
 ```
 
-#### Año Actual cobranza
+### Año Actual cobranza
 
 ```DAX
 "Cobranza acumulada "&CALCULATE(MAX(DimCalendario[Año]),ALLSELECTED())
 ```
 
-#### Año Anterior
+### Año Anterior
 
 Formato: `0`
 
@@ -1290,19 +1327,19 @@ Formato: `0`
 [Año Actual]-1
 ```
 
-#### Mes actual
+### Mes actual
 
 ```DAX
 MAXX(FILTER(DimCalendario,DimCalendario[Date] = MAX(DimCalendario[Date])),DimCalendario[Mes text completo]&" "&YEAR(MAX(DimCalendario[Date])))
 ```
 
-#### Mes actual - 1 año
+### Mes actual - 1 año
 
 ```DAX
 MAXX(FILTER(DimCalendario,DimCalendario[Date] = MAX(DimCalendario[Date])),DimCalendario[Mes text completo])&" "&YEAR(MAX(DimCalendario[Date]))-1
 ```
 
-#### Mes anterior
+### Mes anterior
 
 Descripcion: IF(MONTH(MAX(DimCalendario[Date]))-1=1,"Enero",                 IF(MONTH(MAX(DimCalendario[Date]))-1=2,"Febrero",                     IF(MONTH(MAX(DimCalendario[Date]))-1=3,"Marzo",                         IF(MONTH(MAX(DimCalendario[Date]))-1=4,"Abril",                             IF(MONTH(MAX(DimCalendario[Date]))-1=5,"Mayo",                                 IF(MONTH(MAX(DimCalendario[Date]))-1=6,"Junio",                                     IF(MONTH(MAX(DimCalendario[Date]))-1=7,"Julio",                                         IF(MONTH(MAX(DimCalendario[Date]))-1=8,"Agosto",                                             IF(MONTH(MAX(DimCalendario[Date]))-1=9,"Setiembre",                                                 IF(MONTH(MAX(DimCalendario[Date]))-1=10,"Octubre",                                                     IF(MONTH(MAX(DimCalendario[Date]))-1=11,"Noviembre",                                                         IF(MONTH(MAX(DimCalendario[Date]))-1=12,"Diciembre")))))))))))) &" "&YEAR(MAX(DimCalendario[Date]))
 
@@ -1321,17 +1358,23 @@ IF(MONTH(MAX(DimCalendario[Date]))-1=1,"Enero",
                                                         IF(MONTH(MAX(DimCalendario[Date]))-1=12,"Diciembre")))))))))))) &" "&YEAR(MAX(DimCalendario[Date]))
 ```
 
-#### Ultimodiamesactual
+### Ultimodiamesactual
 
 ```DAX
 FORMAT(EOMONTH(TODAY(),0),"DD/MM/YYYY")
 ```
 
-## MedidasVentas
+</details>
 
-### Carpeta: General
+</details>
 
-#### % Cump Cobrado de VentaSL
+<details>
+<summary><strong>MedidasVentas</strong> (64 medidas)</summary>
+
+<details>
+<summary><strong>Carpeta: General</strong> (64 medidas)</summary>
+
+### % Cump Cobrado de VentaSL
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1339,7 +1382,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 DIVIDE(MedidasCuotaCobranza[Cobrado mes actual],MedidasVentas[Venta SL],0)
 ```
 
-#### % Cump cuota de venta
+### % Cump cuota de venta
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1347,7 +1390,7 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 DIVIDE(MedidasVentas[Venta SL],MedidasVentas[Cuota Venta],0)
 ```
 
-#### % Cump Cuota de venta sele repre
+### % Cump Cuota de venta sele repre
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1359,7 +1402,7 @@ IF(ISBLANK([SeleRepre]),DIVIDE(MedidasVentas[Venta SL],MedidasVentas[Cuota Venta
     DIVIDE(MedidasVentas[Venta SL],[Cuota Venta SeleRepre],0))
 ```
 
-#### % Cump cuota de venta SL
+### % Cump cuota de venta SL
 
 Formato: `0.0\ %;-0.0\ %;0.0\ %`
 
@@ -1367,7 +1410,7 @@ Formato: `0.0\ %;-0.0\ %;0.0\ %`
 DIVIDE(MedidasVentas[Venta SL],MedidasVentas[Cuota Venta SL],0)
 ```
 
-#### % Cump de budget
+### % Cump de budget
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1375,13 +1418,13 @@ Formato: `0.00\ %;-0.00\ %;0.00\ %`
 DIVIDE(MedidasVentas[Venta SL],[Budget],0)
 ```
 
-#### % Cump MA
+### % Cump MA
 
 ```DAX
 DIVIDE(MedidasVentas[Ventas mes actual],MedidasVentas[Cuota venta mes actual],0)
 ```
 
-#### % Cump mes actual
+### % Cump mes actual
 
 Formato: `0\ %;-0\ %;0\ %`
 
@@ -1389,7 +1432,7 @@ Formato: `0\ %;-0\ %;0\ %`
 CALCULATE  ( [% Cump MA] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### % Cump. Mes anterior
+### % Cump. Mes anterior
 
 Formato: `0\ %;-0\ %;0\ %`
 
@@ -1410,7 +1453,7 @@ CALCULATE(
 )
 ```
 
-#### % Variacion Acum Año
+### % Variacion Acum Año
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1422,7 +1465,7 @@ Descripcion:   (MedidasVentas[Ventas YTD CBH]-[AcumuladoHace1Año])/[AcumuladoHa
 (MedidasVentas[Ventas YTD CBH]-[AcumuladoHace1Año])/[AcumuladoHace1Año]
 ```
 
-#### % Variación de venta mensual solo segmento
+### % Variación de venta mensual solo segmento
 
 Formato: `#,0.00\ %;-#,0.00\ %;#,0.00\ %`
 
@@ -1433,7 +1476,7 @@ Descripcion:  DIVIDE(([Venta Solo para segmento]-[Ventas mes anterior solo para 
 DIVIDE(([Venta Solo para segmento]-[Ventas mes anterior solo para segmento]),[Ventas mes anterior solo para segmento])
 ```
 
-#### AcumuladoHace1Año
+### AcumuladoHace1Año
 
 Formato: `"S/"\ #,0.00;-"S/"\ #,0.00;"S/"\ #,0.00`
 
@@ -1454,7 +1497,7 @@ CALCULATE(
 )
 ```
 
-#### Budget
+### Budget
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1462,13 +1505,13 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 SUM(BUDGET[Venta (PPTO)])
 ```
 
-#### Cuota Anual
+### Cuota Anual
 
 ```DAX
 CALCULATE(SUM(Fact_CuotaVenta[cuota_valor]),ALL(DimCalendario[Mes text]))
 ```
 
-#### Cuota Venta
+### Cuota Venta
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1480,7 +1523,7 @@ Descripcion:  /*CALCULATE(Sum(Fact_CuotaVenta[cuota_valor]),USERELATIONSHIP(Fact
 Sum(Fact_CuotaVenta[cuota_valor])
 ```
 
-#### Cuota venta mes actual
+### Cuota venta mes actual
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1488,13 +1531,13 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE  ( [Cuota Venta] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### Cuota venta para maximo
+### Cuota venta para maximo
 
 ```DAX
 [Cuota Venta]*1.8
 ```
 
-#### Cuota Venta SeleRepre
+### Cuota Venta SeleRepre
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1502,7 +1545,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 IF(ISBLANK([SeleRepre]),[Cuota Venta],[Cuota Venta SL])
 ```
 
-#### Cuota Venta SL
+### Cuota Venta SL
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1510,103 +1553,103 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 Sum(Fact_CuotaVenta[cuota_valor])
 ```
 
-#### End value
+### End value
 
 ```DAX
 [Cuota Venta]*1.70
 ```
 
-#### End value Budget
+### End value Budget
 
 ```DAX
 [Budget]*1.70
 ```
 
-#### End value_Tpromedio
+### End value_Tpromedio
 
 ```DAX
 [Ticket promedio mes anterior]*1.7
 ```
 
-#### Franja 2 Budget
+### Franja 2 Budget
 
 ```DAX
 [Budget]*1
 ```
 
-#### Franja1 Budget
+### Franja1 Budget
 
 ```DAX
 [Budget]*0.5
 ```
 
-#### Franja1_Tpromedio
+### Franja1_Tpromedio
 
 ```DAX
 [Ticket promedio mes anterior]*0.5
 ```
 
-#### Franja1_Vcuota
+### Franja1_Vcuota
 
 ```DAX
 [Cuota Venta]*0.5
 ```
 
-#### Franja2_Tpromedio
+### Franja2_Tpromedio
 
 ```DAX
 [Ticket promedio mes anterior]*1
 ```
 
-#### Franja2_Vcuota
+### Franja2_Vcuota
 
 ```DAX
 [Cuota Venta]*1
 ```
 
-#### iconoAño
+### iconoAño
 
 ```DAX
 [Ventas YTD CBH]-[AcumuladoHace1Año]
 ```
 
-#### iconoCumpCuotaVenta
+### iconoCumpCuotaVenta
 
 ```DAX
 MedidasVentas[Venta SL]-[Cuota Venta]
 ```
 
-#### iconoCumpCuotaVenta SL
+### iconoCumpCuotaVenta SL
 
 ```DAX
 MedidasVentas[Venta SL]-[Cuota Venta SL]
 ```
 
-#### iconoVentaActual
+### iconoVentaActual
 
 ```DAX
 [Ventas mes actual]-MedidasVentas[Ventas mes anteriorF]
 ```
 
-#### iconoVentaAnterior
+### iconoVentaAnterior
 
 ```DAX
 [Ventas mes anterior]-MedidasVentas[Ventas mes anterioranterior]
 ```
 
-#### iconoVentaAñoAnterior
+### iconoVentaAñoAnterior
 
 ```DAX
 MedidasVentas[Ventas mes actual]-[VentaMesHace1Año]
 ```
 
-#### Información actualizada al
+### Información actualizada al
 
 ```DAX
 FORMAT(CALCULATE(MAX(Fact_Ventas[fecha]),ALL(DimCalendario)),"DD/MM/YYYY")
 ```
 
-#### N° Pedidos
+### N° Pedidos
 
 Formato: `#,0`
 
@@ -1614,7 +1657,7 @@ Formato: `#,0`
 DISTINCTCOUNT(Fact_Ventas[pedido])
 ```
 
-#### Número de pedidos
+### Número de pedidos
 
 Formato: `0`
 
@@ -1622,7 +1665,7 @@ Formato: `0`
 DISTINCTCOUNT(Fact_Ventas[pedido])
 ```
 
-#### Prueba
+### Prueba
 
 Formato: `General Date`
 
@@ -1630,7 +1673,7 @@ Formato: `General Date`
 MAX(Fact_Ventas[fecha])
 ```
 
-#### puntosventa
+### puntosventa
 
 Formato: `0`
 
@@ -1638,7 +1681,7 @@ Formato: `0`
 DISTINCTCOUNT(Fact_CuotaVenta[bruto])
 ```
 
-#### Rentabilidad
+### Rentabilidad
 
 Formato: `#,0\ %;-#,0\ %;#,0\ %`
 
@@ -1646,25 +1689,25 @@ Formato: `#,0\ %;-#,0\ %;#,0\ %`
 DIVIDE(MedidasMargen[Margen],MedidasVentas[Venta SL],0)
 ```
 
-#### SeleRepre
+### SeleRepre
 
 ```DAX
 SELECTEDVALUE(DimAgente[DesAgente])
 ```
 
-#### Tex cum ven act Rep
+### Tex cum ven act Rep
 
 ```DAX
 "Cumplimiento actual:"
 ```
 
-#### Text budget
+### Text budget
 
 ```DAX
 "Cumplimiento actual:"
 ```
 
-#### Ticket promedio
+### Ticket promedio
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1672,7 +1715,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 DIVIDE(MedidasVentas[Venta SL],[Número de pedidos],0)
 ```
 
-#### Ticket promedio mes anterior
+### Ticket promedio mes anterior
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1690,7 +1733,7 @@ return CALCULATE(
 )
 ```
 
-#### Total budget
+### Total budget
 
 Formato: `"S/"\ #,0.0;#,0.0\ -"S/";"S/"\ #,0.0`
 
@@ -1698,7 +1741,7 @@ Formato: `"S/"\ #,0.0;#,0.0\ -"S/";"S/"\ #,0.0`
 SUM(BUDGET[Venta (PPTO)])
 ```
 
-#### Total unidades vendidas
+### Total unidades vendidas
 
 Formato: `#,0.00`
 
@@ -1706,7 +1749,7 @@ Formato: `#,0.00`
 SUM(Fact_Ventas[unidades])
 ```
 
-#### Venta
+### Venta
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1714,7 +1757,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE(SUM(Fact_Ventas[Venta neta]), USERELATIONSHIP(DimArticulo[kArticulo],Fact_CuotaVenta[kArticulo]))
 ```
 
-#### Venta Cuota Sele Repre
+### Venta Cuota Sele Repre
 
 Formato: `"S/"\ #,0;#,0\ -"S/";"S/"\ #,0`
 
@@ -1726,7 +1769,7 @@ IF(ISBLANK([SeleRepre]),[Cuota Venta],[Cuota Venta SL])
 
 ```
 
-#### Venta mes anterior T
+### Venta mes anterior T
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1739,7 +1782,7 @@ CALCULATE(
 )
 ```
 
-#### Venta SL
+### Venta SL
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1747,7 +1790,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 IF(ISBLANK(SUM(Fact_Ventas[Venta neta])),BLANK(),SUM(Fact_Ventas[Venta neta]))
 ```
 
-#### Venta Solo para segmento
+### Venta Solo para segmento
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1755,13 +1798,13 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 SUM(Fact_Ventas[Venta neta])
 ```
 
-#### VentaMesAnterior
+### VentaMesAnterior
 
 ```DAX
 "Venta Mes" & FORMAT([Ventas mes anterior],"#000")
 ```
 
-#### VentaMesHace1Año
+### VentaMesHace1Año
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1782,7 +1825,7 @@ CALCULATE(
 )
 ```
 
-#### Ventas año actual
+### Ventas año actual
 
 Descripcion:  VAR X = [Año Actual]    RETURN CALCULATE(MedidasVentas[Venta SL],DimCalendario[Año]=X)
 
@@ -1792,7 +1835,7 @@ VAR X = [Año Actual]    RETURN
 CALCULATE(MedidasVentas[Venta SL],DimCalendario[Año]=X)
 ```
 
-#### Ventas año anterior
+### Ventas año anterior
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1804,7 +1847,7 @@ VAR X = [Año Anterior] RETURN
 CALCULATE(MedidasVentas[Venta SL],DimCalendario[Año]=X)
 ```
 
-#### Ventas mes actual
+### Ventas mes actual
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1812,7 +1855,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE  ( MedidasVentas[Venta SL] , DATESINPERIOD  (  DimCalendario[Date],  MAX  (  DimCalendario[Date] ) ,  -1 ,  MONTH )) 
 ```
 
-#### Ventas mes anterior
+### Ventas mes anterior
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1830,7 +1873,7 @@ return CALCULATE(
 )
 ```
 
-#### Ventas mes anterior solo para segmento
+### Ventas mes anterior solo para segmento
 
 Formato: `"S/"\ #,0;#,0\ -"S/";"S/"\ #,0`
 
@@ -1847,7 +1890,7 @@ return CALCULATE(
              ))
 ```
 
-#### Ventas mes anterioranterior
+### Ventas mes anterioranterior
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1868,7 +1911,7 @@ CALCULATE(
 )
 ```
 
-#### Ventas mes anteriorF
+### Ventas mes anteriorF
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1886,7 +1929,7 @@ return CALCULATE(
 )
 ```
 
-#### Ventas YTD CBH
+### Ventas YTD CBH
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1894,7 +1937,7 @@ Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 CALCULATE(MedidasVentas[Venta SL],DATESYTD(DimCalendario[Date]))
 ```
 
-#### Ventas YTD CBH -1
+### Ventas YTD CBH -1
 
 Formato: `"S/"\ #,0.00;-"S/"\ #,0.00;"S/"\ #,0.00`
 
@@ -1909,7 +1952,7 @@ MedidasVentas[Venta SL],
 )
 ```
 
-#### VentasTotalAñoActual
+### VentasTotalAñoActual
 
 Formato: `"S/"\ #,0;-"S/"\ #,0;"S/"\ #,0`
 
@@ -1924,7 +1967,7 @@ IF(
 ),ALLEXCEPT(DimCalendario,DimCalendario[Año]))
 ```
 
-#### YoY% de Venta
+### YoY% de Venta
 
 Formato: `0.00\ %;-0.00\ %;0.00\ %`
 
@@ -1940,5 +1983,9 @@ IF(
 		DIVIDE([Venta SL] - __PREV_YEAR, __PREV_YEAR)
 )
 ```
+
+</details>
+
+</details>
 
 
