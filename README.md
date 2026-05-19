@@ -46,18 +46,18 @@ El dashboard permite analizar la informacion comercial por:
 - Canal comercial
 
 ## Dashboard Preview
-
+ 
 | Portada | Ventas |
 |---|---|
-| ![Portada](images/portada.png) | ![Ventas](images/ventas.png) |
+| ![Portada](images/eficiencia de ventas 2-1.png) | ![Ventas](images/eficiencia de ventas 2-2.png) |
 
 | Cobranza | Cobertura |
 |---|---|
-| ![Cobranza](images/cobranza.png) | ![Cobertura](images/cobertura.png) |
+| ![Cobranza](images/eficiencia de ventas 2-4.png) | ![Cobertura](images/eficiencia de ventas 2-6.png) |
 
 | Analisis geografico |
 |---|
-| ![Geografia](images/geografia.png) |
+| ![Geografia](images/eficiencia de ventas 2-2.png) |
 
 ## Insights Encontrados
 
