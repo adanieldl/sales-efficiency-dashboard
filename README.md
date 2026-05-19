@@ -46,18 +46,37 @@ El dashboard permite analizar la informacion comercial por:
 - Canal comercial
 
 ## Dashboard Preview
- 
-| Portada | Ventas |
-|---|---|
-| ![Portada](images/eficiencia de ventas 2-1.png) | ![Ventas](images/eficiencia de ventas 2-2.png) |
 
-| Cobranza | Cobertura |
-|---|---|
-| ![Cobranza](images/eficiencia de ventas 2-4.png) | ![Cobertura](images/eficiencia de ventas 2-6.png) |
-
-| Analisis geografico |
-|---|
-| ![Geografia](images/eficiencia de ventas 2-2.png) |
+<table>
+  <tr>
+    <td align="center">
+      <strong>Portada</strong><br>
+      <img src="images/eficiencia%20de%20ventas%202-1.png" alt="Portada" width="220">
+    </td>
+    <td align="center">
+      <strong>Ventas</strong><br>
+      <img src="images/eficiencia%20de%20ventas%202-2.png" alt="Ventas" width="220">
+    </td>
+    <td align="center">
+      <strong>Cobertura</strong><br>
+      <img src="images/eficiencia%20de%20ventas%202-3.png" alt="Cobertura" width="220">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Cobranza</strong><br>
+      <img src="images/eficiencia%20de%20ventas%202-4.png" alt="Cobranza" width="220">
+    </td>
+    <td align="center">
+      <strong>Clientes</strong><br>
+      <img src="images/eficiencia%20de%20ventas%202-5.png" alt="Clientes" width="220">
+    </td>
+    <td align="center">
+      <strong>Geografia</strong><br>
+      <img src="images/eficiencia%20de%20ventas%202-6.png" alt="Geografia" width="220">
+    </td>
+  </tr>
+</table>
 
 ## Insights Encontrados
 
